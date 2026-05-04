@@ -2,12 +2,17 @@ name: dbt run
 
 on:
   schedule:
-    - cron: '0 * * * *'  # cada hora
-  workflow_dispatch:       # permite correrlo manualmente desde GitHub
+    - cron: '0 * * * *'
+  workflow_dispatch:
 
 jobs:
   dbt_run:
     runs-on: ubuntu-latest
+
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: us-east-2
 
     steps:
       - name: Checkout repo
@@ -19,25 +24,30 @@ jobs:
           python-version: '3.11'
 
       - name: Install dbt
-        run: pip install dbt-athena-community
+        run: pip install dbt-athena-community awscli
+
+      - name: Test AWS connection
+        run: |
+          aws sts get-caller-identity
+          aws s3 ls s3://weather-pipeline-merida/athena-results/
+          aws athena list-work-groups --region us-east-2
 
       - name: Create profiles.yml
         run: |
           mkdir -p ~/.dbt
-          cat > ~/.dbt/profiles.yml << EOF
+          cat > ~/.dbt/profiles.yml << 'EOF'
           weather_pipeline:
             target: dev
             outputs:
               dev:
                 type: athena
-                region_name: us-east-2
                 work_group: primary
+                region_name: us-east-2
                 s3_staging_dir: s3://weather-pipeline-merida/athena-results/
                 s3_data_dir: s3://weather-pipeline-merida/silver/
                 schema: weather_pipeline
                 database: awsdatacatalog
-                aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-                aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                work_group: primary
                 threads: 1
           EOF
 
