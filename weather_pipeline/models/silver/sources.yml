@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: weather_pipeline
+    database: awsdatacatalog
+    schema: weather_pipeline
+    tables:
+      - name: bronze_current
+      - name: bronze_forecast

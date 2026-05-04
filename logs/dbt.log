@@ -1,0 +1,161 @@
+[0m08:55:57.099032 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001FD9984A990>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001FD9984A7D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001FD99855BD0>]}
+
+
+============================== 08:55:57.126932 | 22d4fb78-9908-4c19-800a-437f008a906c ==============================
+[0m08:55:57.126932 [info ] [MainThread]: Running with dbt=1.11.8
+[0m08:55:57.129051 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'empty': 'None', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': 'C:\\Users\\moise\\.dbt', 'use_colors': 'True', 'invocation_command': 'dbt init weather_pipeline', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'log_path': 'logs'}
+[0m08:55:57.379333 [info ] [MainThread]: Creating dbt configuration folder at C:\Users\moise\.dbt
+[0m08:55:57.394553 [debug] [MainThread]: Starter project path: C:\projects\aws_weather_end_to_end_pipeline\dbt-env\Lib\site-packages\dbt\include\starter_project
+[0m08:55:57.483107 [info ] [MainThread]: 
+Your new dbt project "weather_pipeline" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m08:55:57.484613 [info ] [MainThread]: Setting up your profile.
+[0m08:59:23.789077 [info ] [MainThread]: Profile weather_pipeline written to C:\Users\moise\.dbt\profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+[0m08:59:23.791119 [debug] [MainThread]: Command `dbt init` succeeded at 08:59:23.791119 after 206.80 seconds
+[0m08:59:23.793097 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001FD99855D90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001FD997F3F90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001FD93631F90>]}
+[0m08:59:23.794102 [debug] [MainThread]: Flushing usage events
+[0m08:59:24.830866 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m08:59:53.652238 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B0FD1F0290>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B0FD1F0F50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B0FD24B490>]}
+
+
+============================== 08:59:53.660792 | 68e2da05-aa95-4a2a-b0bf-5ce314672c2a ==============================
+[0m08:59:53.660792 [info ] [MainThread]: Running with dbt=1.11.8
+[0m08:59:53.661786 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'None', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'profiles_dir': 'C:\\Users\\moise\\.dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'invocation_command': 'dbt debug', 'indirect_selection': 'eager', 'use_colors': 'True', 'use_experimental_parser': 'False', 'log_path': 'logs'}
+[0m08:59:53.702384 [info ] [MainThread]: dbt version: 1.11.8
+[0m08:59:53.703380 [info ] [MainThread]: python version: 3.11.9
+[0m08:59:53.704380 [info ] [MainThread]: python path: C:\projects\aws_weather_end_to_end_pipeline\dbt-env\Scripts\python.exe
+[0m08:59:53.705382 [info ] [MainThread]: os info: Windows-10-10.0.26200-SP0
+[0m08:59:54.239128 [info ] [MainThread]: Using profiles dir at C:\Users\moise\.dbt
+[0m08:59:54.241067 [info ] [MainThread]: Using profiles.yml file at C:\Users\moise\.dbt\profiles.yml
+[0m08:59:54.242072 [info ] [MainThread]: Using dbt_project.yml file at C:\projects\aws_weather_end_to_end_pipeline\dbt_project.yml
+[0m08:59:54.244014 [info ] [MainThread]: adapter type: athena
+[0m08:59:54.244687 [info ] [MainThread]: adapter version: 1.10.0
+[0m08:59:54.245722 [info ] [MainThread]: Configuration:
+[0m08:59:54.246753 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m08:59:54.247954 [info ] [MainThread]:   dbt_project.yml file [[31mERROR not found[0m]
+[0m08:59:54.249956 [info ] [MainThread]: Required dependencies:
+[0m08:59:54.250958 [debug] [MainThread]: Executing "git --help"
+[0m08:59:54.328854 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--no-lazy-fetch]\n           [--no-optional-locks] [--no-advice] [--bare] [--git-dir=<path>]\n           [--work-tree=<path>] [--namespace=<name>] [--config-env=<name>=<envvar>]\n           <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone      Clone a repository into a new directory\n   init       Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add        Add file contents to the index\n   mv         Move or rename a file, a directory, or a symlink\n   restore    Restore working tree files\n   rm         Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect     Use binary search to find the commit that introduced a bug\n   diff       Show changes between commits, commit and working tree, etc\n   grep       Print lines matching a pattern\n   log        Show commit logs\n   show       Show various types of objects\n   status     Show the working tree status\n\ngrow, mark and tweak your common history\n   backfill   Download missing objects in a partial clone\n   branch     List, create, or delete branches\n   commit     Record changes to the repository\n   merge      Join two or more development histories together\n   rebase     Reapply commits on top of another base tip\n   reset      Reset current HEAD to the specified state\n   switch     Switch branches\n   tag        Create, list, delete or verify tags\n\ncollaborate (see also: git help workflows)\n   fetch      Download objects and refs from another repository\n   pull       Fetch from and integrate with another repository or a local branch\n   push       Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m08:59:54.329926 [debug] [MainThread]: STDERR: "b''"
+[0m08:59:54.330851 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m08:59:54.331854 [info ] [MainThread]: Connection:
+[0m08:59:54.332855 [info ] [MainThread]:   s3_staging_dir: s3://weather-pipeline-merida/athena-results/
+[0m08:59:54.333853 [info ] [MainThread]:   work_group: None
+[0m08:59:54.334853 [info ] [MainThread]:   skip_workgroup_check: False
+[0m08:59:54.335851 [info ] [MainThread]:   region_name: us-east-2
+[0m08:59:54.336852 [info ] [MainThread]:   database: awsdatacatalog
+[0m08:59:54.339010 [info ] [MainThread]:   schema: weather_pipeline
+[0m08:59:54.340004 [info ] [MainThread]:   poll_interval: 1.0
+[0m08:59:54.341004 [info ] [MainThread]:   aws_profile_name: None
+[0m08:59:54.342007 [info ] [MainThread]:   aws_access_key_id: None
+[0m08:59:54.343290 [info ] [MainThread]:   endpoint_url: None
+[0m08:59:54.344301 [info ] [MainThread]:   s3_data_dir: s3://weather-pipeline-merida/silver/
+[0m08:59:54.345303 [info ] [MainThread]:   s3_data_naming: schema_table_unique
+[0m08:59:54.345303 [info ] [MainThread]:   s3_tmp_table_dir: None
+[0m08:59:54.346815 [info ] [MainThread]:   debug_query_state: False
+[0m08:59:54.347828 [info ] [MainThread]:   seed_s3_upload_args: None
+[0m08:59:54.348824 [info ] [MainThread]:   lf_tags_database: None
+[0m08:59:54.349830 [info ] [MainThread]:   spark_work_group: None
+[0m08:59:54.350826 [info ] [MainThread]: Registered adapter: athena=1.10.0
+[0m08:59:54.989564 [debug] [MainThread]: Acquiring new athena connection 'debug'
+[0m08:59:54.990565 [debug] [MainThread]: Using athena connection "debug"
+[0m08:59:54.991564 [debug] [MainThread]: On debug: select 1 as id
+[0m08:59:54.991564 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m09:02:14.917647 [debug] [MainThread]: dbt.adapters.athena.constants adapter: Error running SQL: select 1 as id
+[0m09:02:14.919576 [debug] [MainThread]: On debug: Close
+[0m09:02:14.921574 [info ] [MainThread]:   Connection test: [[31mERROR[0m]
+
+[0m09:02:14.923629 [info ] [MainThread]: [31m2 checks failed:[0m
+[0m09:02:14.927705 [info ] [MainThread]: Project loading failed for the following reason:
+ project path <C:\projects\aws_weather_end_to_end_pipeline\dbt_project.yml> not found
+
+[0m09:02:14.930703 [info ] [MainThread]: dbt was unable to connect to the specified database.
+The database returned the following error:
+
+  >Runtime Error
+  Unable to locate credentials
+
+Check your database credentials and try again. For more information, visit:
+https://docs.getdbt.com/docs/configure-your-profile
+
+
+[0m09:02:14.936716 [debug] [MainThread]: Command `dbt debug` failed at 09:02:14.936716 after 141.42 seconds
+[0m09:02:14.940543 [debug] [MainThread]: Connection 'debug' was properly closed.
+[0m09:02:14.943534 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B0FD1F3D50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B0FFE78D90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B0F70E3390>]}
+[0m09:02:14.946563 [debug] [MainThread]: Flushing usage events
+[0m09:02:16.137600 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m09:13:02.569869 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E076E4AE50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E076E1D250>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E0718D7750>]}
+
+
+============================== 09:13:02.576455 | 9405d760-f0af-4a7b-b39b-c03f208ed7cf ==============================
+[0m09:13:02.576455 [info ] [MainThread]: Running with dbt=1.11.8
+[0m09:13:02.578388 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'printer_width': '80', 'write_json': 'True', 'empty': 'None', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': 'C:\\Users\\moise\\.dbt', 'use_colors': 'True', 'indirect_selection': 'eager', 'invocation_command': 'dbt debug', 'use_experimental_parser': 'False', 'log_path': 'logs'}
+[0m09:13:02.606307 [info ] [MainThread]: dbt version: 1.11.8
+[0m09:13:02.607276 [info ] [MainThread]: python version: 3.11.9
+[0m09:13:02.608368 [info ] [MainThread]: python path: C:\projects\aws_weather_end_to_end_pipeline\dbt-env\Scripts\python.exe
+[0m09:13:02.609580 [info ] [MainThread]: os info: Windows-10-10.0.26200-SP0
+[0m09:13:03.167313 [info ] [MainThread]: Using profiles dir at C:\Users\moise\.dbt
+[0m09:13:03.168313 [info ] [MainThread]: Using profiles.yml file at C:\Users\moise\.dbt\profiles.yml
+[0m09:13:03.169315 [info ] [MainThread]: Using dbt_project.yml file at C:\projects\aws_weather_end_to_end_pipeline\dbt_project.yml
+[0m09:13:03.171532 [info ] [MainThread]: adapter type: athena
+[0m09:13:03.173044 [info ] [MainThread]: adapter version: 1.10.0
+[0m09:13:03.174001 [info ] [MainThread]: Configuration:
+[0m09:13:03.176012 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m09:13:03.178011 [info ] [MainThread]:   dbt_project.yml file [[31mERROR not found[0m]
+[0m09:13:03.179010 [info ] [MainThread]: Required dependencies:
+[0m09:13:03.180012 [debug] [MainThread]: Executing "git --help"
+[0m09:13:03.240643 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--no-lazy-fetch]\n           [--no-optional-locks] [--no-advice] [--bare] [--git-dir=<path>]\n           [--work-tree=<path>] [--namespace=<name>] [--config-env=<name>=<envvar>]\n           <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone      Clone a repository into a new directory\n   init       Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add        Add file contents to the index\n   mv         Move or rename a file, a directory, or a symlink\n   restore    Restore working tree files\n   rm         Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect     Use binary search to find the commit that introduced a bug\n   diff       Show changes between commits, commit and working tree, etc\n   grep       Print lines matching a pattern\n   log        Show commit logs\n   show       Show various types of objects\n   status     Show the working tree status\n\ngrow, mark and tweak your common history\n   backfill   Download missing objects in a partial clone\n   branch     List, create, or delete branches\n   commit     Record changes to the repository\n   merge      Join two or more development histories together\n   rebase     Reapply commits on top of another base tip\n   reset      Reset current HEAD to the specified state\n   switch     Switch branches\n   tag        Create, list, delete or verify tags\n\ncollaborate (see also: git help workflows)\n   fetch      Download objects and refs from another repository\n   pull       Fetch from and integrate with another repository or a local branch\n   push       Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m09:13:03.241676 [debug] [MainThread]: STDERR: "b''"
+[0m09:13:03.241676 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m09:13:03.243212 [info ] [MainThread]: Connection:
+[0m09:13:03.244223 [info ] [MainThread]:   s3_staging_dir: s3://weather-pipeline-merida/athena-results/
+[0m09:13:03.245222 [info ] [MainThread]:   work_group: None
+[0m09:13:03.247240 [info ] [MainThread]:   skip_workgroup_check: False
+[0m09:13:03.250230 [info ] [MainThread]:   region_name: us-east-2
+[0m09:13:03.253224 [info ] [MainThread]:   database: awsdatacatalog
+[0m09:13:03.254752 [info ] [MainThread]:   schema: weather_pipeline
+[0m09:13:03.256763 [info ] [MainThread]:   poll_interval: 1.0
+[0m09:13:03.257761 [info ] [MainThread]:   aws_profile_name: None
+[0m09:13:03.259765 [info ] [MainThread]:   aws_access_key_id: None
+[0m09:13:03.260762 [info ] [MainThread]:   endpoint_url: None
+[0m09:13:03.261763 [info ] [MainThread]:   s3_data_dir: s3://weather-pipeline-merida/silver/
+[0m09:13:03.261763 [info ] [MainThread]:   s3_data_naming: schema_table_unique
+[0m09:13:03.263294 [info ] [MainThread]:   s3_tmp_table_dir: None
+[0m09:13:03.264304 [info ] [MainThread]:   debug_query_state: False
+[0m09:13:03.265308 [info ] [MainThread]:   seed_s3_upload_args: None
+[0m09:13:03.266341 [info ] [MainThread]:   lf_tags_database: None
+[0m09:13:03.267303 [info ] [MainThread]:   spark_work_group: None
+[0m09:13:03.268306 [info ] [MainThread]: Registered adapter: athena=1.10.0
+[0m09:13:03.856827 [debug] [MainThread]: Acquiring new athena connection 'debug'
+[0m09:13:03.857828 [debug] [MainThread]: Using athena connection "debug"
+[0m09:13:03.858825 [debug] [MainThread]: On debug: select 1 as id
+[0m09:13:03.859779 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m09:13:05.164069 [debug] [MainThread]: dbt.adapters.athena.constants adapter: Athena query ID 7bb9c5c1-912b-498b-8178-0e67920d10be
+[0m09:13:06.849096 [debug] [MainThread]: SQL status: OK -1 in 2.989 seconds
+[0m09:13:06.852091 [debug] [MainThread]: On debug: Close
+[0m09:13:06.853628 [info ] [MainThread]:   Connection test: [[32mOK connection ok[0m]
+
+[0m09:13:06.854733 [info ] [MainThread]: [31m1 check failed:[0m
+[0m09:13:06.856748 [info ] [MainThread]: Project loading failed for the following reason:
+ project path <C:\projects\aws_weather_end_to_end_pipeline\dbt_project.yml> not found
+
+[0m09:13:06.858744 [debug] [MainThread]: Command `dbt debug` failed at 09:13:06.858744 after 4.40 seconds
+[0m09:13:06.858744 [debug] [MainThread]: Connection 'debug' was properly closed.
+[0m09:13:06.859744 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E070D03410>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E070D03350>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E076DF3C50>]}
+[0m09:13:06.860742 [debug] [MainThread]: Flushing usage events
+[0m09:13:07.846213 [debug] [MainThread]: An error was encountered while trying to flush usage events
