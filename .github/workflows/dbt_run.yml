@@ -23,15 +23,6 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install dbt
-        run: pip install dbt-athena-community awscli
-
-      - name: Test AWS connection
-        run: |
-          aws sts get-caller-identity
-          aws s3 ls s3://weather-pipeline-merida/athena-results/
-          aws athena list-work-groups --region us-east-2
-
       - name: Create profiles.yml
         run: |
           mkdir -p ~/.dbt
