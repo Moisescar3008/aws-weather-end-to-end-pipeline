@@ -23,6 +23,9 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Install dbt
+        run: pip install dbt-athena-community
+
       - name: Create profiles.yml
         run: |
           mkdir -p ~/.dbt
@@ -32,7 +35,6 @@ jobs:
             outputs:
               dev:
                 type: athena
-                work_group: primary
                 region_name: us-east-2
                 s3_staging_dir: s3://weather-pipeline-merida/athena-results/
                 s3_data_dir: s3://weather-pipeline-merida/silver/
