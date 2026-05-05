@@ -23,8 +23,8 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install dbt
-        run: pip install dbt-athena-community
+      - name: Install dbt and awscli
+        run: pip install dbt-athena-community awscli
 
       - name: Create profiles.yml
         run: |
@@ -43,6 +43,17 @@ jobs:
                 work_group: primary
                 threads: 1
           EOF
+      
+      - name: Sync Athena partitions
+        run: |
+          aws athena start-query-execution \
+            --query-string "CALL system.sync_partition_metadata('weather_pipeline', 'bronze_current', 'ADD')" \
+            --work-group primary \
+            --region us-east-2
+          aws athena start-query-execution \
+            --query-string "CALL system.sync_partition_metadata('weather_pipeline', 'bronze_forecast', 'ADD')" \
+            --work-group primary \
+            --region us-east-2
 
       - name: Run dbt
         working-directory: weather_pipeline
