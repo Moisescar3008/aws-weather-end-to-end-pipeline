@@ -1,7 +1,8 @@
 {{ config(
     materialized='incremental',
     incremental_strategy='append',
-    schema='silver'
+    schema='silver',
+    format='parquet'
 ) }}
 
 SELECT
