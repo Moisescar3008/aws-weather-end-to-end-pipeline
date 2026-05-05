@@ -47,14 +47,14 @@ jobs:
       - name: Sync Athena partitions
         run: |
           aws athena start-query-execution \
-            --query-string "CALL system.sync_partition_metadata('weather_pipeline', 'bronze_current', 'ADD')" \
+            --query-string "MSCK REPAIR TABLE weather_pipeline.bronze_current" \
             --work-group primary \
             --region us-east-2
           aws athena start-query-execution \
-            --query-string "CALL system.sync_partition_metadata('weather_pipeline', 'bronze_forecast', 'ADD')" \
+            --query-string "MSCK REPAIR TABLE weather_pipeline.bronze_forecast" \
             --work-group primary \
             --region us-east-2
-
+            
       - name: Run dbt
         working-directory: weather_pipeline
         run: dbt run
