@@ -9,6 +9,8 @@ SELECT
     DATE(ingested_at)                        AS date,
     city,
     country,
+    AVG(lon) AS lon,
+    AVG(lat) AS lat,
     ROUND(AVG(temp_c), 2)                    AS temp_avg_c,
     ROUND(MAX(temp_c), 2)                    AS temp_max_c,
     ROUND(MIN(temp_c), 2)                    AS temp_min_c,
