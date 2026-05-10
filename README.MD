@@ -36,7 +36,6 @@ Orchestration: EventBridge (Lambda triggers) + GitHub Actions (partition sync + 
 | Query Engine | Amazon Athena v3 (Serverless) |
 | Transformation | dbt Core + dbt-athena-community |
 | Orchestration | Amazon EventBridge + GitHub Actions |
-| Monitoring | Amazon CloudWatch + Amazon SNS |
 | Visualization | Power BI (Azure Maps) |
 
 ---
