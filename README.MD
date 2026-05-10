@@ -1,6 +1,6 @@
-# 🌤️ AWS Weather End-to-End Data Pipeline
+# 🌤️ AWS Weather End-to-End ELT Pipeline
 
-An end-to-end serverless data engineering pipeline that ingests, transforms, and visualizes real-time and forecast weather data for Mérida, Yucatán using AWS and dbt.
+An end-to-end serverless ELT pipeline that ingests, loads, and transforms real-time and forecast weather data across **32 Mexican state capitals** using AWS and dbt, visualized in Power BI.
 
 ---
 
@@ -9,20 +9,19 @@ An end-to-end serverless data engineering pipeline that ingests, transforms, and
 ```
 OpenWeather API (Current Weather + 5-Day Forecast)
           ↓
-AWS Lambda (Python) — ingestion and JSON flattening
+AWS Lambda (Python) — extraction and JSON flattening
           ↓
-Amazon S3 — Bronze Layer (raw partitioned data)
+Amazon S3 — Bronze Layer (raw partitioned JSONL)
           ↓
-dbt Core + Amazon Athena — SQL transformations
+dbt Core + Amazon Athena — SQL transformations (ELT)
           ↓
-Amazon S3 — Silver Layer (clean, typed data)
+Amazon S3 — Silver Layer (clean, typed Parquet tables)
           ↓
-Amazon S3 — Gold Layer (aggregations and KPIs)
+Amazon S3 — Gold Layer (aggregations and KPIs in Parquet)
           ↓
-Power BI — Visualization Dashboard
+Power BI — Interactive Dashboard (via Athena ODBC)
 
-Orchestration: EventBridge (Lambda triggers) + GitHub Actions (dbt run every hour)
-Monitoring:    Amazon CloudWatch
+Orchestration: EventBridge (Lambda triggers) + GitHub Actions (partition sync + dbt run every hour)
 ```
 
 ---
@@ -31,31 +30,30 @@ Monitoring:    Amazon CloudWatch
 
 | Layer | Tool |
 |---|---|
-| Source | OpenWeather API |
-| Ingestion | AWS Lambda (Python 3.12) |
+| Source | OpenWeather API (Current Weather + 5-Day Forecast) |
+| Extraction | AWS Lambda (Python 3.12) |
 | Storage | Amazon S3 (Medallion Architecture) |
-| Query Engine | Amazon Athena (Serverless) |
+| Query Engine | Amazon Athena v3 (Serverless) |
 | Transformation | dbt Core + dbt-athena-community |
 | Orchestration | Amazon EventBridge + GitHub Actions |
-| Monitoring | Amazon CloudWatch |
-| Visualization | Power BI |
+| Monitoring | Amazon CloudWatch + Amazon SNS |
+| Visualization | Power BI (Azure Maps) |
 
 ---
 
-## 🥉🥈🥇 Medallion Architecture
+## 🥉🥈🥇 Medallion Architecture (ELT)
 
 ```
 s3://weather-pipeline-merida/
 ├── bronze/
-│   ├── current/          ← flattened JSON per hour (Current Weather)
-│   └── forecast/         ← JSONL with 40 records per call (5 Day Forecast)
+│   ├── current/          ← JSONL per ingestion run (32 cities per file)
+│   └── forecast/         ← JSONL with 40 records × 32 cities per call
 ├── silver/
-│   ├── silver_current_weather/   ← clean data, Kelvin → Celsius
-│   └── silver_forecast/          ← clean forecast with rain probability
+│   ├── silver_current_weather/   ← clean data, Kelvin → Celsius, Parquet
+│   └── silver_forecast/          ← clean forecast with rain probability, Parquet
 ├── gold/
-│   ├── gold_daily_summary/       ← daily weather summary
-│   ├── gold_hourly_trend/        ← hourly trend for charts
-│   └── gold_forecast_daily/      ← daily aggregated forecast
+│   ├── gold_daily_summary/       ← daily weather summary per city, Parquet
+│   └── gold_forecast_daily/      ← daily aggregated forecast per city, Parquet
 └── athena-results/       ← Athena query results
 ```
 
@@ -65,9 +63,17 @@ s3://weather-pipeline-merida/
 
 | Process | Trigger | Frequency |
 |---|---|---|
-| Lambda Current Weather | EventBridge | Every hour |
+| Lambda Current Weather | EventBridge | Every 2 hours |
 | Lambda Forecast | EventBridge | Every 3 hours |
-| dbt run | GitHub Actions | Every hour |
+| Partition sync + dbt run | GitHub Actions | Every hour |
+
+---
+
+## 🌎 Coverage
+
+**32 Mexican state capitals:**
+
+Aguascalientes · Mexicali · La Paz · Campeche · Tuxtla Gutiérrez · Chihuahua · Saltillo · Colima · Durango · Guanajuato · Chilpancingo · Pachuca · Guadalajara · Toluca · Morelia · Cuernavaca · Tepic · Monterrey · Oaxaca · Puebla · Querétaro · Chetumal · San Luis Potosí · Culiacán · Hermosillo · Villahermosa · Ciudad Victoria · Tlaxcala · Xalapa · Mérida · Zacatecas · Ciudad de México
 
 ---
 
@@ -77,39 +83,39 @@ s3://weather-pipeline-merida/
 models/
 ├── silver/
 │   ├── sources.yml                  ← bronze table definitions
-│   ├── silver_current_weather.sql   ← cleaning and unit conversion
-│   └── silver_forecast.sql          ← forecast flattening and conversion
+│   ├── silver_current_weather.sql   ← cleaning, unit conversion, Parquet
+│   └── silver_forecast.sql          ← forecast cleaning, rain probability, Parquet
 └── gold/
-    ├── gold_daily_summary.sql       ← daily averages and totals
-    ├── gold_hourly_trend.sql        ← hourly trend for dashboards
-    └── gold_forecast_daily.sql      ← daily forecast with rain probability
+    ├── gold_daily_summary.sql       ← daily avg/max/min per city, Parquet
+    └── gold_forecast_daily.sql      ← 5-day forecast aggregated per city, Parquet
 ```
 
 **Transformations applied:**
 - Temperature conversion Kelvin → Celsius
-- Nested JSON fields extracted to flat columns
-- `COALESCE` on rain fields (field missing when no rain)
+- Nested JSON fields extracted to flat columns in Lambda
+- `COALESCE` on rain fields (field absent when no rain)
 - Unix timestamp converted to readable datetime
-- Rain probability from 0-1 to percentage (0-100%)
-- Daily aggregations: avg, max, min, sum
+- Rain probability from 0–1 to percentage (0–100%)
+- Daily aggregations: avg, max, min, sum per city
+- Output format: Parquet (columnar, optimized for Athena queries)
 
 ---
 
 ## 📊 Dashboard
 
-Built in Power BI connected to Amazon Athena via ODBC driver.
+Built in Power BI connected to Amazon Athena via ODBC, using Azure Maps for geographic visualization.
 
-**Current Weather page**
-- Current temperature, humidity, feels like, and rainfall cards
-- Temperature by hour of day (line chart)
-- Hottest day and rainiest day KPIs (DAX measures)
-- Weather summary by condition (table)
+**Page 1 — Current Weather**
+- Temperature per city bar chart (blue → red gradient)
+- Humidity per city bar chart
+- Hottest city, coldest city, wettest city KPI cards (DAX)
+- Azure Maps with city markers
+- Date slicer
 
-**5-Day Forecast page**
-- Temperature range max/min per day (line chart)
-- Rain probability per day (bar chart)
-- Expected rainfall per day (bar chart)
-- Weather summary by condition (table)
+**Page 2 — 5-Day Forecast**
+- Rain probability per city bar chart
+- Forecast table: city, temp max/min, rain probability, condition
+- Date slicer
 
 ---
 
@@ -118,12 +124,12 @@ Built in Power BI connected to Amazon Athena via ODBC driver.
 | Service | Cost/month |
 |---|---|
 | AWS Lambda | $0.00 |
-| Amazon S3 | ~$0.01 |
-| Amazon Athena | ~$0.50 |
+| Amazon S3 | ~$0.05 |
+| Amazon Athena | ~$1.50 |
 | Amazon EventBridge | $0.00 |
-| Amazon CloudWatch | ~$0.01 |
+| Amazon CloudWatch + SNS | ~$0.05 |
 | GitHub Actions | $0.00 |
-| **Total** | **~$0.52/month** |
+| **Total** | **~$1.60/month** |
 
 > Without continuous execution the cost is practically $0.00/month.
 
@@ -151,8 +157,6 @@ Built in Power BI connected to Amazon Athena via ODBC driver.
 ```
 OPENWEATHER_API_KEY  → your OpenWeather API key
 S3_BUCKET            → S3 bucket name
-CITY                 → Merida
-COUNTRY_CODE         → MX
 ```
 
 ### 3. GitHub Secrets
@@ -169,12 +173,3 @@ pip install dbt-athena-community
 cd weather_pipeline
 dbt run
 ```
-
----
-
-## 📈 Roadmap
-
-- [ ] Add more cities in southeastern Mexico (Cancún, Campeche, Valladolid)
-- [ ] dbt data quality tests (not_null, freshness, accepted_values)
-- [ ] CloudWatch alerts if Lambda fails
-- [ ] Map dashboard with bubble chart per city in Power BI
