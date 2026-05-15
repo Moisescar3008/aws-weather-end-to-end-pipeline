@@ -118,6 +118,25 @@ Built in Power BI connected to Amazon Athena via ODBC, using Azure Maps for geog
 
 ---
 
+
+---
+
+## 📊 Dashboard Insights
+
+The Power BI dashboard provides a comprehensive view of weather conditions across the 32 Mexican state capitals, structured into two main analytical views:
+
+<p align="center">
+  <img src="images/Mexico%20now.png" width="48%" alt="Mexico Now Dashboard" />
+  <img src="images/National.png" width="48%" alt="National Analysis Dashboard" />
+</p>
+
+### Key Features:
+* **Real-Time Monitoring (Mexico Now):** Displays current temperature, humidity, and weather conditions per city. It includes a dynamic temperature gradient (blue to red) and KPI cards for extreme values (Hottest, Coldest, and Wettest cities).
+* **Geospatial Analysis:** Integrated Azure Maps with city markers to visualize geographic weather patterns across the country.
+* **Predictive Insights:** A 5-day forecast view tracking rain probability and temperature trends to support data-driven planning.
+* **Data Integrity:** All visualizations are powered by the "Gold" layer in Amazon S3, ensuring that metrics are pre-aggregated and validated through dbt tests.
+
+
 ## 💰 Estimated Cost
 
 | Service | Cost/month |
